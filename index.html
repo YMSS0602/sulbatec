@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subatec — Carreira em TI no Sul da Bahia</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+
+    /* ═══ HERO ═══ */
+   
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-ico">⚡</div>
+      <span><span class="logo-sul">Sul</span><span class="logo-atec">ba</span><span>tec</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#cursos" class="active">Cursos</a>
+      <a href="#oportunidades">Oportunidades</a>
+      <a href="#carreiras">Carreiras</a>
+      <a href="#dicas">Dicas</a>
+      <a href="#comunidade">Comunidade</a>
+      <a href="roadmap.html">Roadmap</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-social">
+        <a href="https://instagram.com/subatec" target="_blank" class="soc-btn ig" title="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+        <a href="https://youtube.com/@subatec" target="_blank" class="soc-btn yt" title="YouTube"><i class="fa-brands fa-youtube"></i>
+</a>
+      </div>
+      <button class="theme-btn" id="theme-toggle" title="Alternar tema">☀️</button>
+      <a href="roadmap.html" class="btn btn-sm btn-c" style="font-size:12px">🗺 Roadmap</a>
+      <button class="ham" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mob-menu" id="mob-menu">
+    <a href="#cursos">📚 Cursos</a>
+    <a href="#oportunidades">💼 Oportunidades</a>
+    <a href="#carreiras">🚀 Carreiras</a>
+    <a href="#dicas">💡 Dicas</a>
+    <a href="roadmap.html">🗺 Roadmap Interativo</a>
+    <div class="mob-div"></div>
+    <div class="mob-soc">
+      <a href="https://instagram.com/subatec" target="_blank" class="soc-btn ig">📸 Instagram</a>
+      <a href="https://youtube.com/@subatec" target="_blank" class="soc-btn yt">▶️ YouTube</a>
+    </div>
+  </div>
+
+  <!--Barra de Sugestões-->
+  <div class="search-wrapper">
+
+  <div
+    class="suggestions-box"
+    id="searchSuggestions">
+  </div>
+
+</div>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero-wrap">
+    <canvas id="cv"></canvas>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="hero">
+      <div class="hero-eye"><span class="hero-eye-dot"></span>Sul da Bahia · 100% gratuito · Projeto Unex S.I.</div>
+      <h1>Aprenda tecnologia e <span class="grad">encontre oportunidades</span> em TI</h1>
+      <p class="hero-sub">Cursos gratuitos, concursos de TI, guias de carreira, estágios e conteúdos para estudantes do
+        Sul da Bahia. Do zero ao mercado de trabalho.</p>
+      <div class="hero-acts">
+        <a href="#cursos" class="btn btn-p">📚 Explorar cursos</a>
+        <a href="#oportunidades" class="btn btn-c">💼 Ver oportunidades</a>
+        <a href="roadmap.html" class="btn btn-o">🗺 Meu roadmap</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-n grad" data-count="120" data-suffix="+">0+</div>
+          <div class="stat-l">Cursos gratuitos</div>
+        </div>
+        <div>
+          <div class="stat-n grad" data-count="3500" data-suffix="+">0+</div>
+          <div class="stat-l">Estudantes da Bahia</div>
+        </div>
+        <div>
+          <div class="stat-n grad" data-count="7" data-suffix="">0</div>
+          <div class="stat-l">Áreas de carreira</div>
+        </div>
+        <div>
+          <div class="stat-n grad" data-count="100" data-suffix="%">0%</div>
+          <div class="stat-l">Gratuito, sempre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SEARCH ═══ -->
+<div class="search-wrap">
+  <div class="container" style="position: relative;">
+    <div class="search-bar">
+      <span>🔍</span>
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Buscar cursos, tecnologias, plataformas..." 
+        autocomplete="off" 
+        onkeydown="if(event.key === 'Enter') { event.preventDefault(); window.handleSearch(); }"
+      />
+      <button onclick="handleSearch()">Buscar</button>
+    </div>
+    <div class="suggestions-box" id="searchSuggestions" style="display: none; position: absolute; width: 100%; max-height: 250px; overflow-y: auto; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--rs); z-index: 999; box-shadow: var(--shadow);"></div>
+  </div>
+</div>
+
+  <!-- ═══ CATEGORIES ═══ -->
+  <section class="section" id="categorias">
+    <div class="sec-lbl">Categorias</div>
+    <div class="sec-header">
+      <h2 class="sec-title">Explore por área</h2><a href="#" class="see-all">Ver todas →</a>
+    </div>
+    <div class="cats-grid">
+      <a href="#" class="cat-c active" onclick="filterCat(this,'todos');return false">
+        <div class="cat-ico">🧩</div>
+        <div class="cat-nm">Todos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'tech');return false">
+        <div class="cat-ico">💻</div>
+        <div class="cat-nm">Programação</div>
+        <div class="cat-ct">42 cursos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'redes');return false">
+        <div class="cat-ico">🌐</div>
+        <div class="cat-nm">Redes</div>
+        <div class="cat-ct">18 cursos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'cloud');return false">
+        <div class="cat-ico">☁️</div>
+        <div class="cat-nm">Cloud</div>
+        <div class="cat-ct">14 cursos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'seg');return false">
+        <div class="cat-ico">🔐</div>
+        <div class="cat-nm">Segurança</div>
+        <div class="cat-ct">12 cursos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'db');return false">
+        <div class="cat-ico">🗄️</div>
+        <div class="cat-nm">Banco de Dados</div>
+        <div class="cat-ct">16 cursos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'mobile');return false">
+        <div class="cat-ico">📱</div>
+        <div class="cat-nm">Mobile</div>
+        <div class="cat-ct">10 cursos</div>
+      </a>
+      <a href="#" class="cat-c" onclick="filterCat(this,'suporte');return false">
+        <div class="cat-ico">🖥️</div>
+        <div class="cat-nm">Suporte TI</div>
+        <div class="cat-ct">9 cursos</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ COURSES ═══ -->
+  <section class="section" id="cursos">
+    <div class="sec-lbl">Cursos gratuitos</div>
+    <div class="sec-header">
+      <h2 class="sec-title">Cursos em destaque</h2>
+    </div>
+    <div class="ftabs">
+      <button class="ftab active" onclick="setFtab(this,'todos')">Todos</button>
+      <button class="ftab" onclick="setFtab(this,'tech')">Programação</button>
+      <button class="ftab" onclick="setFtab(this,'redes')">Redes</button>
+      <button class="ftab" onclick="setFtab(this,'cloud')">Cloud</button>
+      <button class="ftab" onclick="setFtab(this,'seg')">Segurança</button>
+      <button class="ftab" onclick="setFtab(this,'db')">Banco de Dados</button>
+      <button class="ftab" onclick="setFtab(this,'mobile')">Mobile</button>
+      <button class="ftab" onclick="setFtab(this,'suporte')">Suporte TI</button>
+    </div>
+    <div class="courses-grid" id="courseGrid">
+
+      <a href="https://www.cursoemvideo.com/curso/java-poo/" target="_blank" rel="noopener" class="cc"
+        data-category="tech">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#1a1c30,#2a1a38)">☕<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Curso em Vídeo</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Programação</div>
+          <h3 class="cc-title">Java — Programação Orientada a Objetos</h3>
+          <p class="cc-desc">Aprenda Java do zero com POO, herança, polimorfismo e coleções.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 40h</span><span class="meta-i">👤 Gustavo
+              Guanabara</span></div><span class="lvl lvl-m">Intermediário</span>
+        </div>
+      </a>
+
+      <a href="https://www.cursoemvideo.com/curso/python-3-mundo-1/" target="_blank" rel="noopener" class="cc"
+        data-category="tech">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#1a1c2a,#1a2838)">🐍<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Curso em Vídeo</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Programação</div>
+          <h3 class="cc-title">Python 3 do Zero ao Avançado</h3>
+          <p class="cc-desc">A linguagem mais pedida do mercado. Lógica, funções, módulos e POO.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 40h</span><span class="meta-i">👤 Guanabara</span>
+          </div><span class="lvl lvl-i">Iniciante</span>
+        </div>
+      </a>
+
+      <a href="https://www.netacad.com/courses/networking/ccna-introduction-networks" target="_blank" rel="noopener"
+        class="cc" data-category="redes">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#0a1a2a,#0a2035)">🌐<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Cisco NetAcad</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Redes</div>
+          <h3 class="cc-title">CCNA — Introdução às Redes</h3>
+          <p class="cc-desc">Fundamentos de redes, TCP/IP, roteamento e switching pela Cisco Academy.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 70h</span><span class="meta-i">🏅 Certificado</span>
+          </div><span class="lvl lvl-m">Intermediário</span>
+        </div>
+      </a>
+
+      <a href="https://www.cursoemvideo.com/curso/linux/" target="_blank" rel="noopener" class="cc"
+        data-category="redes">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#1a200a,#1a2a0a)">🐧<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Curso em Vídeo</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Redes / SO</div>
+          <h3 class="cc-title">Linux — Do Básico ao Avançado</h3>
+          <p class="cc-desc">Terminal, permissões, gerenciamento de pacotes, scripts Bash e muito mais.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 32h</span></div><span
+            class="lvl lvl-i">Iniciante</span>
+        </div>
+      </a>
+
+      <a href="https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/" target="_blank"
+        rel="noopener" class="cc" data-category="cloud">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#0a1822,#0a2030)">☁️<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">AWS Training</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Cloud</div>
+          <h3 class="cc-title">AWS Cloud Practitioner Essentials</h3>
+          <p class="cc-desc">Conceitos fundamentais de cloud computing com a maior plataforma do mundo.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 8h</span><span class="meta-i">🏅 Badge</span></div>
+          <span class="lvl lvl-i">Iniciante</span>
+        </div>
+      </a>
+
+      <a href="https://tryhackme.com/path/outline/presecurity" target="_blank" rel="noopener" class="cc"
+        data-category="seg">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#220a0a,#300a0a)">🔐<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">TryHackMe</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Segurança</div>
+          <h3 class="cc-title">Pré-Segurança — TryHackMe</h3>
+          <p class="cc-desc">Fundamentos de cibersegurança com laboratórios práticos e hands-on.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 24h</span><span class="meta-i">🎮 Prático</span>
+          </div><span class="lvl lvl-i">Iniciante</span>
+        </div>
+      </a>
+
+      <a href="https://www.cursoemvideo.com/curso/mysql/" target="_blank" rel="noopener" class="cc" data-category="db">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#0a1a22,#0a1830)">🗄️<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Curso em Vídeo</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Banco de Dados</div>
+          <h3 class="cc-title">MySQL — Do Básico ao Avançado</h3>
+          <p class="cc-desc">SQL, modelagem relacional, procedures, triggers e otimização de queries.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 28h</span></div><span
+            class="lvl lvl-m">Intermediário</span>
+        </div>
+      </a>
+
+      <a href="https://flutter.dev/learn" target="_blank" rel="noopener" class="cc" data-category="mobile">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#0a1030,#1a0a30)">📱<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Flutter.dev</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Mobile</div>
+          <h3 class="cc-title">Flutter & Dart — Apps para Android e iOS</h3>
+          <p class="cc-desc">Crie apps multiplataforma com Google Flutter. Da instalação ao deploy na Play Store.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 30h</span></div><span
+            class="lvl lvl-m">Intermediário</span>
+        </div>
+      </a>
+
+      <a href="https://www.cursoemvideo.com/curso/curso-de-hardware/" target="_blank" rel="noopener" class="cc"
+        data-category="suporte">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#1a1010,#2a1820)">🖥️<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Curso em Vídeo</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Suporte TI</div>
+          <h3 class="cc-title">Hardware e Montagem de PCs</h3>
+          <p class="cc-desc">Componentes, manutenção preventiva, montagem e diagnóstico de problemas.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 12h</span></div><span
+            class="lvl lvl-i">Iniciante</span>
+        </div>
+      </a>
+
+      <a href="https://cs50.harvard.edu/x/" target="_blank" rel="noopener" class="cc" data-category="tech">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#0a0e22,#0a1530)">🎓<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Harvard / edX</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Programação</div>
+          <h3 class="cc-title">CS50 — Ciência da Computação (Harvard)</h3>
+          <p class="cc-desc">O melhor curso introdutório de CS do mundo. Em inglês, mas com legendas PT-BR.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 100h</span><span class="meta-i">🏅
+              Certificado</span></div><span class="lvl lvl-m">Intermediário</span>
+        </div>
+      </a>
+
+      <a href="https://kaggle.com/learn" target="_blank" rel="noopener" class="cc" data-category="tech">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#0f1a10,#1a2810)">📊<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">Kaggle</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Dados</div>
+          <h3 class="cc-title">Machine Learning & Data Science — Kaggle</h3>
+          <p class="cc-desc">Python, Pandas, Machine Learning e visualização de dados com certificado gratuito.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 20h</span><span class="meta-i">🏅 Certificado</span>
+          </div><span class="lvl lvl-m">Intermediário</span>
+        </div>
+      </a>
+
+      <a href="https://portswigger.net/web-security" target="_blank" rel="noopener" class="cc" data-category="seg">
+        <div class="cc-thumb" style="background:linear-gradient(135deg,#220a10,#3a0a10)">🕷️<div class="cc-bads"><span
+              class="b-free">Gratuito</span><span class="b-plat">PortSwigger</span></div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-cat">Segurança Web</div>
+          <h3 class="cc-title">Web Security Academy — Burp Suite</h3>
+          <p class="cc-desc">OWASP Top 10, SQLi, XSS, CSRF e mais — laboratórios práticos completos e gratuitos.</p>
+        </div>
+        <div class="cc-foot">
+          <div style="display:flex;gap:12px"><span class="meta-i">⏱ 60h</span><span class="meta-i">🎮 Labs</span></div>
+          <span class="lvl lvl-a">Avançado</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ OPPORTUNITIES ═══ -->
+  <div class="opps-bg" id="oportunidades">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="sec-lbl">Oportunidades</div>
+      <div class="sec-header">
+        <h2 class="sec-title">Vagas, eventos e bolsas</h2><a href="#" class="see-all">Ver todas →</a>
+      </div>
+    </div>
+    <div class="opps-grid">
+      <div class="opp">
+        <div class="opp-bar" style="background:linear-gradient(90deg,var(--danger),#FF8C00)"></div>
+        <div class="opp-ico">📋</div>
+        <div class="opp-type" style="color:var(--danger)">Concurso Público</div>
+        <div class="opp-title">Analista de TI — UNEB Bahia</div>
+        <div class="opp-desc">Concurso para cargo de Analista de Tecnologia da Informação. Vagas para toda a Bahia.
+        </div>
+        <div class="opp-foot"><span class="opp-date">📅 Inscrições até 30/07/2026</span><a href="#"
+            class="btn btn-sm btn-o">Ver edital</a></div>
+      </div>
+      <div class="opp">
+        <div class="opp-bar" style="background:linear-gradient(90deg,var(--accent),var(--cyan))"></div>
+        <div class="opp-ico">💼</div>
+        <div class="opp-type" style="color:var(--accent)">Estágio</div>
+        <div class="opp-title">Estagiário de Suporte TI — Itabuna/BA</div>
+        <div class="opp-desc">Empresa de Itabuna busca estudante de TI para suporte técnico e helpdesk. Bolsa + VT.
+        </div>
+        <div class="opp-foot"><span class="opp-date">📅 Aberta</span><a href="#" class="btn btn-sm btn-p">Candidatar</a>
+        </div>
+      </div>
+      <div class="opp">
+        <div class="opp-bar" style="background:linear-gradient(90deg,var(--cyan),#00B8A9)"></div>
+        <div class="opp-ico">🎓</div>
+        <div class="opp-type" style="color:var(--cyan)">Bolsa de Estudos</div>
+        <div class="opp-title">Google Developer Student Clubs</div>
+        <div class="opp-desc">Programa de bolsas e certificações Google para estudantes de TI. Aberto para toda a Bahia.
+        </div>
+        <div class="opp-foot"><span class="opp-date">📅 Inscrições abertas</span><a href="https://gdsc.community.dev/"
+            target="_blank" class="btn btn-sm btn-c">Inscrever-se</a></div>
+      </div>
+      <div class="opp">
+        <div class="opp-bar" style="background:linear-gradient(90deg,var(--warn),#FF8C00)"></div>
+        <div class="opp-ico">📅</div>
+        <div class="opp-type" style="color:var(--warn)">Evento</div>
+        <div class="opp-title">TechDay Sul da Bahia 2026</div>
+        <div class="opp-desc">Evento de tecnologia com palestras, workshops e networking em Ilhéus/BA. Gratuito!</div>
+        <div class="opp-foot"><span class="opp-date">📅 15 de Agosto, 2026</span><a href="#"
+            class="btn btn-sm btn-o">Saiba mais</a></div>
+      </div>
+      <div class="opp">
+        <div class="opp-bar" style="background:linear-gradient(90deg,#A78BFA,var(--accent))"></div>
+        <div class="opp-ico">💼</div>
+        <div class="opp-type" style="color:#A78BFA">Trainee</div>
+        <div class="opp-title">Programa Trainee TI — Grupo Bahia</div>
+        <div class="opp-desc">Trainee em Desenvolvimento de Sistemas para recém-formados. Regime híbrido, Ilhéus/BA.
+        </div>
+        <div class="opp-foot"><span class="opp-date">📅 Encerra em 20/08</span><a href="#" class="btn btn-sm btn-p">Ver
+            vaga</a></div>
+      </div>
+      <div class="opp">
+        <div class="opp-bar" style="background:linear-gradient(90deg,var(--cyan),var(--accent))"></div>
+        <div class="opp-ico">🏆</div>
+        <div class="opp-type" style="color:var(--cyan)">Hackathon</div>
+        <div class="opp-title">Hackathon Bahia Inovação 2026</div>
+        <div class="opp-desc">Maratona de programação com foco em soluções para o interior da Bahia. Premiação de R$
+          15.000.</div>
+        <div class="opp-foot"><span class="opp-date">📅 Set/2026</span><a href="#"
+            class="btn btn-sm btn-c">Inscrever</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FEATURED ═══ -->
+  <section class="section">
+    <div class="feat">
+      <div class="feat-content">
+        <div class="sec-lbl" style="margin-bottom:14px">🗺 Destaque</div>
+        <div class="feat-title">Roadmap interativo <span class="grad">por carreira</span></div>
+        <p class="feat-desc">Não sabe por onde começar? Escolha sua área (Programação, Redes, Segurança, Dados,
+          Cloud...) e siga o passo a passo com recursos gratuitos, certificações e dicas de mercado — tudo para o
+          contexto baiano.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="roadmap.html" class="btn btn-p">Ver Roadmap Completo →</a>
+          <a href="#carreiras" class="btn btn-o">Explorar carreiras</a>
+        </div>
+      </div>
+      <div class="feat-vis">🗺️</div>
+    </div>
+  </section>
+
+  <!-- ═══ CAREERS ═══ -->
+  <section class="section" id="carreiras">
+    <div class="sec-lbl">Carreiras em TI</div>
+    <div class="sec-header">
+      <h2 class="sec-title">Qual carreira combina com você?</h2><span style="font-size:13px;color:var(--muted)">Clique
+        para ver salário, roadmap e ferramentas</span>
+    </div>
+    <div class="careers-grid">
+      <div class="career" onclick="openCareer('suporte')" style="border-top:3px solid #1EEBC5"><span
+          class="career-emo">🖥️</span>
+        <div class="career-nm">Suporte TI</div>
+        <div class="career-dem dem-h">Alta demanda ↑</div>
+      </div>
+      <div class="career" onclick="openCareer('redes')" style="border-top:3px solid #337DFF"><span
+          class="career-emo">🌐</span>
+        <div class="career-nm">Redes</div>
+        <div class="career-dem dem-h">Alta demanda ↑</div>
+      </div>
+      <div class="career" onclick="openCareer('programacao')" style="border-top:3px solid #A78BFA"><span
+          class="career-emo">💻</span>
+        <div class="career-nm">Programação</div>
+        <div class="career-dem dem-h">Altíssima ↑↑</div>
+      </div>
+      <div class="career" onclick="openCareer('dados')" style="border-top:3px solid #F59E0B"><span
+          class="career-emo">📊</span>
+        <div class="career-nm">Dados</div>
+        <div class="career-dem dem-h">Alta demanda ↑</div>
+      </div>
+      <div class="career" onclick="openCareer('seguranca')" style="border-top:3px solid #EF4444"><span
+          class="career-emo">🔐</span>
+        <div class="career-nm">Segurança</div>
+        <div class="career-dem dem-m">Crescente →</div>
+      </div>
+      <div class="career" onclick="openCareer('cloud')" style="border-top:3px solid #06B6D4"><span
+          class="career-emo">☁️</span>
+        <div class="career-nm">Cloud & DevOps</div>
+        <div class="career-dem dem-h">Alta demanda ↑</div>
+      </div>
+      <div class="career" onclick="openCareer('mobile')" style="border-top:3px solid #8B5CF6"><span
+          class="career-emo">📱</span>
+        <div class="career-nm">Mobile</div>
+        <div class="career-dem dem-m">Crescente →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TIPS ═══ -->
+  <section class="section" id="dicas">
+    <div class="sec-lbl">Dicas & Artigos</div>
+    <div class="sec-header">
+      <h2 class="sec-title">Conteúdo para sua carreira</h2>
+    </div>
+    <div class="tips-grid"></div>
+      <div class="tip">
+        <div class="tip-tag">💼 Carreira</div>
+        <div class="tip-title">Como conseguir estágio em TI sem experiência</div>
+        <p class="tip-desc">Estratégias reais para entrar no mercado saindo da faculdade: portfólio, certificações e
+          onde buscar vagas no Sul da Bahia.</p>
+        <div class="tip-foot"><span class="tip-date">📅 Mai 2026</span><span class="tip-read">Ler artigo →</span></div>
+      </div>
+      <div class="tip">
+        <div class="tip-tag">🎓 Educação</div>
+        <div class="tip-title">Faculdade vs Curso Técnico em TI: qual escolher?</div>
+        <p class="tip-desc">Comparativo honesto entre a graduação em S.I./CC e cursos técnicos do SENAI/SENAC para quem
+          está no Sul da Bahia.</p>
+        <div class="tip-foot"><span class="tip-date">📅 Abr 2026</span><span class="tip-read">Ler artigo →</span></div>
+      </div>
+      <div class="tip">
+        <div class="tip-tag">📄 Currículo</div>
+        <div class="tip-title">Como montar um currículo de TI que chama atenção</div>
+        <p class="tip-desc">Templates, o que colocar (e o que NÃO colocar), como descrever projetos e certificações para
+          vagas de tecnologia.</p>
+        <div class="tip-foot"><span class="tip-date">📅 Mar 2026</span><span class="tip-read">Ler artigo →</span></div>
+      </div>
+      <div class="tip">
+        <div class="tip-tag">🏅 Certificações</div>
+        <div class="tip-title">As melhores certificações gratuitas para iniciantes em TI</div>
+        <p class="tip-desc">CompTIA, Cisco, AWS, Google e Microsoft — quais valem mais o seu tempo e como se preparar
+          sem gastar nada.</p>
+        <div class="tip-foot"><span class="tip-date">📅 Mar 2026</span><span class="tip-read">Ler artigo →</span></div>
+      </div>
+      <div class="tip">
+        <div class="tip-tag">💻 Programação</div>
+        <div class="tip-title">Do zero ao primeiro emprego como desenvolvedor</div>
+        <p class="tip-desc">Roteiro de estudos, projetos para o portfólio e onde encontrar as primeiras oportunidades de
+          dev no Brasil.</p>
+        <div class="tip-foot"><span class="tip-date">📅 Fev 2026</span><span class="tip-read">Ler artigo →</span></div>
+      </div>
+      <div class="tip">
+        <div class="tip-tag">🌐 Redes</div>
+        <div class="tip-title">CCNA vale a pena em 2026? Guia completo</div>
+        <p class="tip-desc">Análise da certificação mais famosa de redes, quanto custa, como estudar de graça e se ainda
+          é relevante no mercado.</p>
+        <div class="tip-foot"><span class="tip-date">📅 Jan 2026</span><span class="tip-read">Ler artigo →</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ADMIN POSTS ═══ -->
+  <div class="posts-bg" id="comunidade">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="sec-lbl">Comunidade</div>
+      <div class="sec-header">
+        <h2 class="sec-title">Últimos conteúdos do Subatec</h2><span style="font-size:12px;color:var(--muted)">Instagram
+          · YouTube · Vagas</span>
+      </div>
+      <div class="posts-grid" id="posts-grid">
+        <div class="post-empty">Nenhum post publicado ainda. Administradores podem postar conteúdo aqui.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SOCIAL CTA ═══ -->
+  <section class="section" id="comunidade2">
+    <div class="scta">
+      <div class="scta-title">Faça parte da <span class="grad">comunidade Subatec</span></div>
+      <p class="scta-desc">Acompanhe vagas, dicas de carreira, novidades em TI e conteúdos exclusivos para estudantes do
+        Sul da Bahia nas nossas redes.</p>
+      <div class="scta-btns">
+        <a href="https://instagram.com/subatec" target="_blank" rel="noopener" class="btn btn-ig">📸 Seguir no
+          Instagram</a>
+        <a href="https://youtube.com/@subatec" target="_blank" rel="noopener" class="btn btn-yt">▶️ Canal no YouTube</a>
+        <a href="roadmap.html" class="btn btn-o">🗺 Ver Roadmap Grátis</a>
+      </div>
+      <div style="margin-top:24px;font-size:12px;color:var(--muted);position:relative">Projeto universitário
+        desenvolvido pelo grupo de Sistemas de Informação · <strong style="color:var(--text2)">Unex —
+          Itabuna/BA</strong></div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="logo foot-logo">
+          <div class="logo-ico">⚡</div><span><span class="logo-sub">Sub</span><span class="logo-atec">atec</span></span>
+        </a>
+        <p class="foot-desc">Plataforma gratuita de orientação de carreira em TI para estudantes e profissionais do Sul
+          da Bahia. Projeto universitário Unex S.I.</p>
+        <div class="foot-socs">
+          <a href="https://instagram.com/subatec" target="_blank" class="soc-btn ig">📸</a>
+          <a href="https://youtube.com/@subatec" target="_blank" class="soc-btn yt">▶️</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Aprender</h4>
+        <a href="#cursos">Cursos gratuitos</a>
+        <a href="roadmap.html">Roadmap interativo</a>
+        <a href="#dicas">Artigos & Dicas</a>
+        <a href="#carreiras">Guia de carreiras</a>
+      </div>
+      <div class="foot-col">
+        <h4>Oportunidades</h4>
+        <a href="#oportunidades">Estágios</a>
+        <a href="#oportunidades">Concursos TI</a>
+        <a href="#oportunidades">Bolsas</a>
+        <a href="#oportunidades">Eventos</a>
+      </div>
+      <div class="foot-col">
+        <h4>Projeto</h4>
+        <a href="#comunidade">Comunidade</a>
+        <a href="https://instagram.com/sulbatec" target="_blank">Instagram</a>
+        <a href="https://youtube.com/@subatec" target="_blank">YouTube</a>
+        <a href="mailto:subatec@unex.edu.br">Contato</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Subatec · <span class="unex-badge">Unex</span>Sistemas de Informação · Itabuna, Bahia</span>
+      <span style="display:flex;align-items:center;gap:6px">Feito com 💙 para o Sul da Bahia</span>
+    </div>
+  </footer>
+
+  <!-- ═══ CAREER MODAL ═══ -->
+  <div class="backdrop" id="career-back" onclick="if(event.target===this)closeCareer()">
+    <div class="modal" id="career-modal">
+      <div class="modal-h">
+        <div class="modal-h-left">
+          <div class="modal-ico" id="cm-ico">💻</div>
+          <div>
+            <div class="modal-title" id="cm-title">Carreira</div><span class="tag" id="cm-dem"></span>
+          </div>
+        </div>
+        <button class="m-close" onclick="closeCareer()">✕ Fechar</button>
+      </div>
+      <div class="modal-tabs">
+        <button class="ctab active" onclick="switchTab(this,0)">📋 Visão geral</button>
+        <button class="ctab" onclick="switchTab(this,1)">🛠 Ferramentas</button>
+        <button class="ctab" onclick="switchTab(this,2)">🗺 Roadmap</button>
+        <button class="ctab" onclick="switchTab(this,3)">🏅 Certificações</button>
+      </div>
+      <div class="modal-body">
+        <div class="ctpanel active" id="cp0">
+          <div class="sal-box">
+            <div class="sal-lbl">Salário médio</div>
+            <div class="sal-val grad" id="cm-sal"></div>
+            <div class="sal-adv" id="cm-sal-adv"></div>
+          </div>
+          <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:16px" id="cm-desc"></p>
+          <div
+            style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">
+            O que faz no dia a dia</div>
+          <ul id="cm-wd" style="padding-left:18px;display:flex;flex-direction:column;gap:6px"></ul>
+        </div>
+        <div class="ctpanel" id="cp1">
+          <div class="tools-wrap" id="cm-tools"></div>
+        </div>
+        <div class="ctpanel" id="cp2">
+          <div class="rm-steps" id="cm-rm"></div>
+        </div>
+        <div class="ctpanel" id="cp3">
+          <ul id="cm-certs" style="padding-left:18px;display:flex;flex-direction:column;gap:8px"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ADMIN MODAL ═══ -->
+  <button class="admin-fab" id="admin-fab" onclick="showAdmin()" title="Admin — Publicar conteúdo">⚙️</button>
+  <div class="backdrop" id="admin-back" onclick="if(event.target===this)closeAdmin()">
+    <div class="modal" style="max-width:520px">
+      <div class="modal-h">
+        <div class="modal-h-left">
+          <div style="font-size:20px">📢</div>
+          <div class="modal-title">Publicar conteúdo</div>
+        </div><button class="m-close" onclick="closeAdmin()">✕</button>
+      </div>
+      <div class="adm-form">
+        <input type="hidden" id="adm-id" />
+        <div class="field"><label>Tipo</label>
+          <select id="adm-type">
+            <option value="instagram">📸 Instagram</option>
+            <option value="youtube">▶️ YouTube</option>
+            <option value="vaga">💼 Vaga</option>
+            <option value="evento">📅 Evento</option>
+            <option value="dica">💡 Dica</option>
+            <option value="curso">📚 Curso</option>
+          </select>
+        </div>
+        <div class="field"><label>Título *</label><input type="text" id="adm-title" placeholder="Título do post..." />
+        </div>
+        <div class="field"><label>Descrição</label><textarea id="adm-desc" placeholder="Breve descrição..."></textarea>
+        </div>
+        <div class="field"><label>Link (Instagram, YouTube, etc.)</label><input type="url" id="adm-link"
+            placeholder="https://..." /></div>
+      </div>
+      <div class="modal-foot"><button class="btn btn-o btn-sm" onclick="closeAdmin()">Cancelar</button><button
+          class="btn btn-p btn-sm" onclick="savePost()">Publicar</button></div>
+    </div>
+  </div>
+
+<div class="toasts" id="toasts"></div>
+
+  <script src="main.js"></script>
+
+ <script>
+  /* ═══════════════════════════════════════
+     SUBATEC — SCRIPT INTERNO (INDEX.HTML)
+     Focado exclusivamente em UI Estática
+  ═══════════════════════════════════════ */
+
+  /* ── PARTICLES (Efeito Visual do Fundo) ── */
+  (function () {
+    const cv = document.getElementById('cv');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    let W, H, nodes = [];
+    const mouse = { x: -999, y: -999 };
+    
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      W = cv.parentElement.offsetWidth; H = cv.parentElement.offsetHeight;
+      cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+      nodes = Array.from({ length: Math.min(Math.floor(W * H / 10000), 90) }, () => ({
+        x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4, r: Math.random() * 1.5 + 1
+      }));
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    cv.parentElement.addEventListener('mousemove', e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top });
+    cv.parentElement.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999 });
+    
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      const lt = document.documentElement.getAttribute('data-theme') === 'light';
+      const nc = lt ? 'rgba(51,125,255,.45)' : 'rgba(51,125,255,.65)';
+      const lc = lt ? 'rgba(51,125,255,.1)' : 'rgba(51,125,255,.16)';
+      const mc = lt ? 'rgba(30,235,197,.4)' : 'rgba(30,235,197,.65)';
+      const ml = lt ? 'rgba(30,235,197,.1)' : 'rgba(30,235,197,.2)';
+      nodes.forEach((n, i) => {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1; if (n.y < 0 || n.y > H) n.vy *= -1;
+        const mdx = mouse.x - n.x, mdy = mouse.y - n.y, md = Math.sqrt(mdx * mdx + mdy * mdy);
+        nodes.slice(i + 1).forEach(m => {
+          const dx = m.x - n.x, dy = m.y - n.y, d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 130) { ctx.beginPath(); ctx.strokeStyle = lc; ctx.globalAlpha = 1 - d / 130; ctx.lineWidth = .7; ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke() }
+        });
+        if (md < 160) { ctx.beginPath(); ctx.strokeStyle = ml; ctx.globalAlpha = 1 - md / 160; ctx.lineWidth = .9; ctx.moveTo(n.x, n.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke() }
+        ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fillStyle = md < 160 ? mc : nc; ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  /* ── MOBILE NAV (Menu Responsivo) ── */
+  const ham = document.getElementById('ham'), mob = document.getElementById('mob-menu');
+  if (ham && mob) {
+    ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open') });
+    document.addEventListener('click', e => { if (!ham.contains(e.target) && !mob.contains(e.target)) { ham.classList.remove('open'); mob.classList.remove('open') } });
+  }
+
+  /* ── COUNTERS (Animação dos Números) ── */
+  function animCounters() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const tg = parseInt(el.dataset.count), sx = el.dataset.suffix || '';
+      let c = 0; const st = Math.ceil(tg / 55);
+      const iv = setInterval(() => { c = Math.min(c + st, tg); el.textContent = c.toLocaleString('pt-BR') + sx; if (c >= tg) clearInterval(iv) }, 22);
+    });
+  }
+  const so = new IntersectionObserver(e => { if (e[0].isIntersecting) { animCounters(); so.disconnect() } });
+  const hs = document.querySelector('.hero-stats'); if (hs) so.observe(hs);
+
+  /* ── CAREER DICTIONARY (Dados Estatísticos de Carreiras) ── */
+  const CD = {
+    suporte: {
+      ico: '🖥️', title: 'Suporte TI', color: '#1EEBC5', dem: 'Alta demanda', demTag: 'tag-c',
+      sal: 'R$ 2.000 – R$ 4.500', adv: 'Até R$ 7.000 (sênior/CFTV/N2)',
+      desc: 'Porta de entrada da TI. Atende usuários, resolve problemas de hardware e software, instala sistemas e mantém a infraestrutura funcionando. Muito valorizado no interior da Bahia, onde poucos profissionais existem.',
+      wd: ['Atender helpdesk (tickets N1/N2)', 'Instalar e configurar computadores', 'Gerenciar Active Directory e Office 365', 'Solucionar problemas de rede local', 'Manutenção preventiva e corretiva'],
+      tools: ['Windows Server', 'Active Directory', 'Linux Ubuntu', 'TeamViewer', 'GLPI / Jira', 'ITIL', 'VMware', 'Office 365'],
+      rm: [{ s: 'Hardware & Montagem', d: 'Componentes do PC, manutenção' }, { s: 'Sistemas Operacionais', d: 'Windows 10/11 e Linux básico' }, { s: 'Redes básicas', d: 'TCP/IP, DNS, DHCP' }, { s: 'Helpdesk / ITIL', d: 'Ticket, atendimento, processos' }, { s: 'CompTIA A+', d: 'Certificação internacional de técnico TI' }],
+      certs: ['CompTIA A+', 'ITIL 4 Foundation', 'Microsoft MTA', 'HDI Support Center Analyst']
+    },
+    redes: {
+      ico: '🌐', title: 'Redes & Infraestrutura', color: '#337DFF', dem: 'Alta demanda', demTag: 'tag-c',
+      sal: 'R$ 3.000 – R$ 6.500', adv: 'Até R$ 12.000 (especialista CCNP+)',
+      desc: 'Projeta, implementa e mantém redes corporativas. Com a expansão das redes em toda a Bahia, especialmente em Itabuna, Ilhéus e Jequié, há escassez de profissionais qualificados — ótima oportunidade para quem mora no interior.',
+      wd: ['Configurar switches, roteadores e firewalls', 'Implementar VLANs e VPNs', 'Monitorar tráfego com Zabbix/Nagios', 'Solucionar problemas de conectividade', 'Documentar a infraestrutura de rede'],
+      tools: ['Cisco IOS', 'Wireshark', 'pfSense', 'Zabbix', 'OSPF/BGP', 'FortiGate', 'MikroTik', 'Packet Tracer'],
+      rm: [{ s: 'Fundamentos de Redes', d: 'OSI, TCP/IP, endereçamento IPv4/6' }, { s: 'Switching & VLANs', d: 'Switches, Spanning Tree, VLANs' }, { s: 'Routing Protocols', d: 'OSPF, BGP, roteamento dinâmico' }, { s: 'CCNA 200-301', d: 'Certificação Cisco CCNA' }, { s: 'Segurança de Redes', d: 'Firewalls, ACLs, VPN, IDS/IPS' }, { s: 'Cloud Networking', d: 'AWS VPC, SDN, automação' }],
+      certs: ['CompTIA Network+', 'Cisco CCNA', 'Cisco CCNP', 'Juniper JNCIA']
+    },
+    programacao: {
+      ico: '💻', title: 'Programação & Dev', color: '#A78BFA', dem: 'Altíssima demanda', demTag: 'tag-a',
+      sal: 'R$ 3.500 – R$ 8.000', adv: 'Até R$ 25.000+ (sênior / remote-first)',
+      desc: 'Uma das carreiras com melhor remuneração e mais abertura para trabalho remoto — ideal para quem mora no interior da Bahia e quer acessar o mercado nacional ou internacional sem sair de casa.',
+      wd: ['Desenvolver apps web e mobile', 'Criar e consumir APIs REST', 'Trabalhar com bancos relacionais e NoSQL', 'Fazer code review e testes', 'Trabalhar em sprints ágeis (Scrum)'],
+      tools: ['Python / JavaScript / Java', 'React / Vue', 'Node.js / Django', 'Git / GitHub', 'Docker', 'PostgreSQL / MongoDB', 'AWS / GCP'],
+      rm: [{ s: 'Lógica de Programação', d: 'Algoritmos e estruturas de dados' }, { s: 'Linguagem base (Python ou JS)', d: 'Sintaxe, funções, POO' }, { s: 'Web: HTML, CSS, JS', d: 'Front-end básico e responsivo' }, { s: 'Framework + Back-end', d: 'React + Node.js ou Django' }, { s: 'Banco de Dados + API REST', d: 'SQL, JWT, autenticação' }, { s: 'Git + Deploy + Cloud', d: 'CI/CD, AWS básico, portfólio' }, { s: 'Portfólio + 1º emprego', d: 'Projetos no GitHub, LinkedIn' }],
+      certs: ['AWS Cloud Practitioner', 'Oracle Java SE', 'GitHub Foundations', 'Google UX Design']
+    },
+    dados: {
+      ico: '📊', title: 'Dados & Analytics', color: '#F59E0B', dem: 'Alta demanda', demTag: 'tag-c',
+      sal: 'R$ 4.000 – R$ 9.000', adv: 'Até R$ 20.000 (Cientista de Dados sênior)',
+      desc: 'Área em explosão com IA e BI sendo adotados em todos os setores. Profissionais de dados são escassos no interior da Bahia — uma vantagem competitiva enorme para quem se qualificar agora.',
+      wd: ['Coletar e limpar dados de várias fontes', 'Criar dashboards no Power BI/Tableau', 'Construir pipelines ETL', 'Aplicar modelos estatísticos e ML', 'Comunicar insights ao negócio'],
+      tools: ['Python (Pandas, NumPy)', 'SQL', 'Power BI', 'Jupyter Notebook', 'Scikit-learn', 'BigQuery', 'Tableau'],
+      rm: [{ s: 'Python para Dados', d: 'Pandas, NumPy, Matplotlib' }, { s: 'SQL Avançado', d: 'CTEs, window functions, otimização' }, { s: 'Estatística', d: 'Probabilidade, regressão, testes A/B' }, { s: 'Power BI / Tableau', d: 'Dashboards e visualizações' }, { s: 'Machine Learning', d: 'Scikit-learn, modelos supervisionados' }, { s: 'Big Data & Cloud', d: 'Spark, BigQuery, arquitetura de dados' }],
+      certs: ['Google Data Analytics Certificate', 'IBM Data Science', 'Power BI PL-300', 'AWS Data Analytics']
+    },
+    seguranca: {
+      ico: '🔐', title: 'Segurança da Informação', color: '#EF4444', dem: 'Crescente', demTag: 'tag-w',
+      sal: 'R$ 5.000 – R$ 12.000', adv: 'Até R$ 30.000 (CISO / Pen Tester sênior)',
+      desc: 'Com ataques cibernéticos crescendo 200% ao ano no Brasil e a LGPD em vigor, a demanda por especialistas em segurança é urgente. Área com os melhores salários de TI e poucos profissionais qualificados.',
+      wd: ['Realizar pentest e auditorias de segurança', 'Monitorar incidentes (SOC)', 'Implementar políticas LGPD/ISO 27001', 'Analisar malware e vulnerabilidades', 'Responder a incidentes de segurança'],
+      tools: ['Kali Linux', 'Metasploit', 'Burp Suite', 'Wireshark / Nmap', 'Splunk / ELK', 'OWASP', 'Nessus'],
+      rm: [{ s: 'Linux + Redes', d: 'Base essencial para qualquer área de segurança' }, { s: 'CompTIA Security+', d: 'Fundamentos de cibersegurança' }, { s: 'Pentest & Ethical Hacking', d: 'Reconhecimento, exploração, relatório' }, { s: 'Blue Team / SOC', d: 'SIEM, análise de logs, resposta a incidentes' }, { s: 'CEH ou OSCP', d: 'Certificação avançada de hacker ético' }, { s: 'Cloud / AppSec', d: 'DevSecOps, segurança de APIs e cloud' }],
+      certs: ['CompTIA Security+', 'CEH — Certified Ethical Hacker', 'OSCP (Offensive Security)', 'CISM / CISSP']
+    },
+    cloud: {
+      ico: '☁️', title: 'Cloud & DevOps', color: '#06B6D4', dem: 'Alta demanda', demTag: 'tag-c',
+      sal: 'R$ 5.000 – R$ 14.000', adv: 'Até R$ 35.000+ (Arquiteto Cloud)',
+      desc: 'Toda empresa está migrando para a cloud. Profissionais com AWS + DevOps são dos mais pagos do mercado brasileiro — e o trabalho 100% remoto torna essa carreira perfeita para quem mora no interior da Bahia.',
+      wd: ['Provisionar recursos AWS/Azure/GCP', 'Criar pipelines CI/CD', 'Containerizar apps com Docker e Kubernetes', 'Infrastructure as Code (Terraform)', 'Monitorar performance e custos na cloud'],
+      tools: ['AWS / Azure / GCP', 'Docker / Kubernetes', 'Terraform / Ansible', 'GitHub Actions', 'Linux / Bash', 'Prometheus / Grafana', 'Jenkins'],
+      rm: [{ s: 'Linux + Redes + Git', d: 'Fundamentos essenciais' }, { s: 'AWS Cloud Practitioner', d: 'Conceitos de cloud computing' }, { s: 'Docker & Containers', d: 'Criação e gerenciamento de containers' }, { s: 'CI/CD Pipelines', d: 'GitHub Actions, automação de deploy' }, { s: 'Kubernetes', d: 'Orquestração de containers' }, { s: 'Terraform (IaC)', d: 'Infrastructure as Code' }, { s: 'AWS Solutions Architect', d: 'Certificação de arquiteto de soluções' }],
+      certs: ['AWS Cloud Practitioner', 'AWS Solutions Architect', 'Google Cloud Associate', 'CKA (Kubernetes)']
+    },
+    mobile: {
+      ico: '📱', title: 'Desenvolvimento Mobile', color: '#8B5CF6', dem: 'Crescente', demTag: 'tag-w',
+      sal: 'R$ 3.500 – R$ 9.000', adv: 'Até R$ 20.000 (sênior / freelance)',
+      desc: 'O Brasil tem 230 milhões de smartphones. Apps mobile têm altíssima demanda e excelente mercado de freelance — ótimo para quem mora no interior da Bahia e quer trabalhar de casa.',
+      wd: ['Desenvolver apps iOS e Android', 'Publicar na Google Play e App Store', 'Integrar APIs e serviços externos', 'Otimizar performance e UX mobile', 'Manter e atualizar apps existentes'],
+      tools: ['React Native / Flutter', 'Swift / Kotlin', 'Expo', 'Firebase', 'Redux', 'Android Studio / Xcode', 'REST API'],
+      rm: [{ s: 'JavaScript ou Dart', d: 'Linguagem base para React Native ou Flutter' }, { s: 'React Native ou Flutter', d: 'Componentes, navegação, estado' }, { s: 'APIs & Firebase', d: 'Consumo de APIs REST, banco em tempo real' }, { s: 'UI/UX Mobile', d: 'Material Design, Human Interface Guidelines' }, { s: 'Publicação de apps', d: 'Google Play Console e App Store Connect' }, { s: 'App real no portfólio', d: 'Publicar um app completo na loja' }],
+      certs: ['Google Associate Android Developer', 'Meta React Native Certificate', 'Flutter Developer Certificate']
+    }
+  };
+
+  /* ── MODAL CARREIRAS ── */
+  window.openCareer = function(key) {
+    const d = CD[key]; if (!d) return;
+    document.getElementById('cm-ico').textContent = d.ico;
+    document.getElementById('cm-title').textContent = d.title;
+    const dem = document.getElementById('cm-dem'); dem.textContent = d.dem; dem.className = 'tag ' + d.demTag;
+    document.getElementById('cm-sal').textContent = d.sal;
+    document.getElementById('cm-sal-adv').textContent = d.adv;
+    document.getElementById('cm-desc').textContent = d.desc;
+    document.getElementById('cm-wd').innerHTML = d.wd.map(w => `<li style="margin-bottom:6px;color:var(--text2);font-size:13px">${w}</li>`).join('');
+    document.getElementById('cm-tools').innerHTML = d.tools.map(t => `<span class="tool-chip">${t}</span>`).join('');
+    document.getElementById('cm-rm').innerHTML = d.rm.map((r, i) => `<div class="rm-step"><div class="step-n">${i + 1}</div><div class="step-n-info"><h4>${r.s}</h4><p>${r.d}</p></div></div>`).join('');
+    document.getElementById('cm-certs').innerHTML = d.certs.map(c => `<li style="margin-bottom:7px;font-size:13px;color:var(--text2)">🏅 ${c}</li>`).join('');
+    document.querySelectorAll('.ctab').forEach((t, i) => { t.classList.toggle('active', i === 0) });
+    document.querySelectorAll('.ctpanel').forEach((p, i) => { p.classList.toggle('active', i === 0) });
+    document.getElementById('career-back').classList.add('open');
+  }
+  window.closeCareer = function() { document.getElementById('career-back').classList.remove('open') }
+  window.switchTab = function(el, i) {
+    document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active')); el.classList.add('active');
+    document.querySelectorAll('.ctpanel').forEach((p, j) => p.classList.toggle('active', j === i));
+  }
+
+  /* ── ADMIN POSTS (Painel Simulado Local) ── */
+  const PASS = 'subatec2026';
+  let isAdmin = sessionStorage.getItem('sba') === '1';
+  
+  window.showAdmin = function() {
+    if (!isAdmin) { const p = prompt('🔐 Senha de administrador:'); if (p === PASS) { sessionStorage.setItem('sba', '1'); isAdmin = true; if(typeof toast === 'function') toast('Bem-vindo, admin! 👋', 's') } else if (p !== null) { if(typeof toast === 'function') toast('Senha incorreta.', 'e'); return } }
+    document.getElementById('admin-back').classList.add('open');
+  }
+  window.closeAdmin = function() { document.getElementById('admin-back').classList.remove('open') }
+  function getPosts() { return JSON.parse(localStorage.getItem('sba_posts') || '[]') }
+  function setPosts(p) { localStorage.setItem('sba_posts', JSON.stringify(p)) }
+  
+  window.savePost = function() {
+    const title = document.getElementById('adm-title').value.trim();
+    const desc = document.getElementById('adm-desc').value.trim();
+    const link = document.getElementById('adm-link').value.trim();
+    const type = document.getElementById('adm-type').value;
+    if (!title) { if(typeof toast === 'function') toast('Preencha o título', 'e'); return }
+    const posts = getPosts();
+    posts.unshift({ id: Date.now().toString(), title, desc, link, type, date: new Date().toLocaleDateString('pt-BR') });
+    setPosts(posts); closeAdmin(); renderPosts(); if(typeof toast === 'function') toast('Post publicado!', 's');
+  }
+  window.delPost = function(id) { if (!confirm('Excluir?')) return; setPosts(getPosts().filter(p => p.id !== id)); renderPosts(); if(typeof toast === 'function') toast('Removido.', 's') }
+  
+  function renderPosts() {
+    const g = document.getElementById('posts-grid'); if (!g) return;
+    const posts = getPosts();
+    const icons = { instagram: '📸', youtube: '▶️', vaga: '💼', evento: '📅', dica: '💡', curso: '📚' };
+    const labels = { instagram: 'Instagram', youtube: 'YouTube', vaga: 'Vaga', evento: 'Evento', dica: 'Dica', curso: 'Curso' };
+    if (!posts.length) { g.innerHTML = '<div class="post-empty">Nenhum post publicado ainda.<br/>Administradores podem postar conteúdo aqui.</div>'; return }
+    g.innerHTML = posts.map(p => `<div class="post">
+    <div class="post-tp"><span class="post-plat">${icons[p.type] || '📄'} ${labels[p.type] || p.type}</span><span class="post-date">${p.date}</span></div>
+    <div class="post-ttl">${p.title}</div>
+    ${p.desc ? `<div class="post-desc">${p.desc}</div>` : ''}
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+      ${p.link ? `<a class="post-lnk" href="${p.link}" target="_blank" rel="noopener">Ver →</a>` : '<span></span>'}
+      ${isAdmin ? `<button onclick="delPost('${p.id}')" style="background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);font-size:11px;padding:2px 7px;cursor:pointer">✕</button>` : ''}
+    </div></div>`).join('');
+  }
+  
+  /* ── ANIMATIONS ── */
+  const ao = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)' } }) }, { threshold: .1 });
+  
+  /* ── INITIALIZATION ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    renderPosts();
+    document.querySelectorAll('.cc,.opp,.tip,.career,.cat-c').forEach(el => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(14px)'; el.style.transition = 'opacity .4s ease, transform .4s ease';
+      ao.observe(el);
+    });
+  });
+
+  /* ── CLOSE MODALS ON ESC ── */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCareer(); closeAdmin() } });
+</script>
+</body>
+
+</html>

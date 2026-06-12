@@ -1,0 +1,223 @@
+
+
+nav {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      height: var(--nav);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      background: rgba(2, 11, 42, .9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(238, 242, 255, .9)
+    }
+
+    .logo {
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none
+    }
+
+    .logo-ico {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      box-shadow: 0 2px 14px rgba(51, 125, 255, .4)
+    }
+
+    .logo-sub {
+      color: var(--accent)
+    }
+
+    .logo-atec {
+      color: var(--cyan)
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all var(--tr)
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: var(--bg3)
+    }
+
+    .nav-r {
+      display: flex;
+      align-items: center;
+      gap: 7px
+    }
+
+    .nav-social {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-right: 7px;
+      border-right: 1px solid var(--border)
+    }
+
+    .soc-btn {
+      width: 33px;
+      height: 33px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all var(--tr)
+    }
+
+    .soc-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    .soc-btn.yt:hover {
+      border-color: #f00;
+      color: #f00
+    }
+
+.soc-btn.ig:hover {
+    background: linear-gradient(
+        45deg,
+        #f09433,
+        #e6683c,
+        #dc2743,
+        #cc2366,
+        #bc1888
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+    .yt {
+      color: rgb(153, 0, 0);
+    }
+
+    .theme-btn {
+      width: 33px;
+      height: 33px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      transition: all var(--tr)
+    }
+
+    .theme-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    .ham {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 6px
+    }
+
+    .ham span {
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all var(--tr);
+      display: block
+    }
+
+    .ham.open span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px)
+    }
+
+    .ham.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .ham.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px)
+    }
+
+    .mob-menu {
+      position: fixed;
+      top: var(--nav);
+      left: 0;
+      right: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 5vw 22px;
+      z-index: 299;
+      transform: translateY(-110%);
+      transition: transform .25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .mob-menu.open {
+      transform: translateY(0)
+    }
+
+    .mob-menu a {
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 500;
+      transition: all var(--tr)
+    }
+
+    .mob-menu a:hover {
+      background: var(--bg3);
+      color: var(--text)
+    }
+
+    .mob-soc {
+      display: flex;
+      gap: 8px;
+      padding: 10px 14px
+    }
+
+    .mob-div {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0
+    }

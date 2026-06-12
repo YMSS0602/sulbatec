@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="roadmap.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap Interativo — Sulbatec</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-ico">⚡</div>
+      <span><span class="logo-sub">Sul</span><span>ba</span><span class="logo-atec">tec</span></span>
+    </a>
+    <div class="nav-r">
+      <a href="https://instagram.com/sulbatec" target="_blank" class="soc-btn ig">📸</a>
+      <a href="https://youtube.com/@sulbatec" target="_blank" class="soc-btn yt">▶️</a>
+      <button class="theme-btn" id="theme-toggle">☀️</button>
+      <a href="index.html" class="btn btn-o btn-sm">← Home</a>
+      <button class="ham" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mob-menu" id="mob-menu">
+    <a href="index.html">🏠 Home</a>
+    <a href="index.html#cursos">📚 Cursos</a>
+    <a href="index.html#oportunidades">💼 Oportunidades</a>
+    <a href="index.html#carreiras">🚀 Carreiras</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div
+      style="display:inline-flex;align-items:center;gap:7px;background:rgba(30,235,197,.1);border:1px solid rgba(30,235,197,.28);color:var(--cyan);font-size:11px;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.6px">
+      <span
+        style="width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite;display:inline-block"></span>
+      Roadmap interativo — Sulbatec
+    </div>
+    <h1>Seu caminho em <span class="grad">TI passo a passo</span></h1>
+    <p>Escolha sua área, marque o que já aprendeu e acompanhe seu progresso. Todos os recursos são gratuitos.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="index.html#carreiras" class="btn btn-o btn-sm">👀 Ver salários por carreira</a>
+      <a href="index.html#cursos" class="btn btn-c btn-sm">📚 Cursos gratuitos</a>
+    </div>
+  </div>
+  <style>
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.5)
+      }
+    }
+  </style>
+
+  <!-- PATH TABS -->
+  <div class="path-wrap">
+    <div class="path-tabs" id="path-tabs"></div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="prog-wrap">
+    <div class="prog-inner">
+      <span class="prog-lbl">Progresso</span>
+      <div class="prog-bar">
+        <div class="prog-fill" id="prog-fill"></div>
+      </div>
+      <span class="prog-pct" id="prog-pct">0%</span>
+      <span class="prog-steps" id="prog-steps">0/0 etapas</span>
+      <button class="prog-reset" onclick="resetProg()">↺ Resetar</button>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="l-dot" style="background:var(--cyan)"></div>Concluído
+    </div>
+    <div class="legend-item">
+      <div class="l-dot" style="background:var(--accent)"></div>Em andamento
+    </div>
+    <div class="legend-item">
+      <div class="l-dot" style="background:var(--border2)"></div>Opcional (tracejado)
+    </div>
+  </div>
+
+  <!-- ROADMAP CANVAS -->
+  <div class="rmap-canvas" id="rmap-canvas"></div>
+
+  <!-- TOASTS -->
+  <div class="toasts" id="toasts"></div>
+
+  <script>
+    /* ── THEME ── */
+    (function () {
+      const s = localStorage.getItem('subatec_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', s);
+      const b = document.getElementById('theme-toggle'); if (b) b.textContent = s === 'dark' ? '☀️' : '🌙';
+    })();
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const c = document.documentElement.getAttribute('data-theme') || 'dark', n = c === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', n); localStorage.setItem('subatec_theme', n);
+      document.getElementById('theme-toggle').textContent = n === 'dark' ? '☀️' : '🌙';
+    });
+    const ham = document.getElementById('ham'), mob = document.getElementById('mob-menu');
+    ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open') });
+
+    /* ── ROADMAP DATA ── */
+    const MAPS = {
+      programacao: {
+        label: '💻 Programação', color: '#A78BFA', phases: [
+          {
+            label: 'Fase 1 — Fundamentos', cls: 'p1', nodes: [
+              { id: 'logica', ico: '🧠', title: 'Lógica de Programação', desc: 'Algoritmos, estruturas condicionais, loops e estruturas de dados básicas. A base de tudo.', tags: ['Algoritmos', 'Pseudocódigo', 'Fluxograma'], res: [{ n: 'Curso em Vídeo — Algoritmos (Gratuito)', u: 'https://cursoemvideo.com/curso/curso-de-algoritmos/' }, { n: 'Visualgo — Visualize estruturas de dados', u: 'https://visualgo.net/' }] },
+              { id: 'git', ico: '🔧', title: 'Git & GitHub', desc: 'Controle de versão desde o dia 1. Essencial para qualquer área de TI.', tags: ['Versionamento', 'Colaboração', 'Open Source'], res: [{ n: 'Git & GitHub (Curso em Vídeo) — Gratuito', u: 'https://cursoemvideo.com/curso/curso-de-git-e-github/' }, { n: 'Learn Git Branching (interativo, pt-BR)', u: 'https://learngitbranching.js.org/?locale=pt_BR' }] },
+            ]
+          },
+          {
+            label: 'Fase 2 — Linguagem & Web', cls: 'p2', nodes: [
+              { id: 'python', ico: '🐍', title: 'Python ou JavaScript', desc: 'Python para back-end/dados. JavaScript para web full-stack. Ambos têm mercado enorme.', tags: ['Python', 'JavaScript', 'POO', 'Funções'], res: [{ n: 'Python 3 Mundo 1 (Curso em Vídeo) — Gratuito', u: 'https://cursoemvideo.com/curso/python-3-mundo-1/' }, { n: 'JavaScript (freeCodeCamp) — Gratuito', u: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/' }] },
+              { id: 'webcss', ico: '🌐', title: 'HTML & CSS', desc: 'Estrutura e estilo da web. Semântica, Flexbox, CSS Grid, responsividade.', tags: ['HTML5', 'CSS3', 'Flexbox', 'Grid'], res: [{ n: 'HTML & CSS Módulo 1 (Curso em Vídeo) — Gratuito', u: 'https://cursoemvideo.com/curso/html5-css3-modulo1/' }] },
+              { id: 'sql', ico: '🗄️', title: 'SQL & Banco de Dados', desc: 'Todo sistema precisa de banco. MySQL ou PostgreSQL para começar.', tags: ['MySQL', 'PostgreSQL', 'Joins', 'Modelagem'], res: [{ n: 'MySQL (Curso em Vídeo) — Gratuito', u: 'https://cursoemvideo.com/curso/mysql/' }, { n: 'SQLZoo — Exercícios interativos', u: 'https://sqlzoo.net/' }] },
+            ]
+          },
+          {
+            label: 'Fase 3 — Framework & Back-end', cls: 'p2', nodes: [
+              { id: 'react', ico: '⚛️', title: 'React (Front-end)', desc: 'O framework front-end mais usado do mercado. Components, hooks, estado e rotas.', tags: ['React', 'Hooks', 'SPA', 'TypeScript'], res: [{ n: 'Documentação oficial React — Gratuito', u: 'https://react.dev/learn' }, { n: 'CS50 Web (Harvard) — Gratuito', u: 'https://cs50.harvard.edu/web/2020/' }] },
+              { id: 'backend', ico: '⚙️', title: 'Back-end + API REST', desc: 'Node.js ou Django/Flask. APIs REST com JWT, autenticação e banco de dados.', tags: ['Node.js', 'Express', 'JWT', 'REST API'], res: [{ n: 'Back-end com Node (freeCodeCamp) — Gratuito', u: 'https://www.freecodecamp.org/learn/back-end-development-and-apis/' }, { n: 'Django Girls Tutorial — Gratuito', u: 'https://tutorial.djangogirls.org/pt/' }] },
+            ]
+          },
+          {
+            label: 'Fase 4 — Deploy & Carreira', cls: 'p3', nodes: [
+              { id: 'docker', ico: '🐳', title: 'Docker & Deploy', desc: 'Containerize sua app e faça deploy na AWS, Vercel ou Railway.', tags: ['Docker', 'CI/CD', 'AWS', 'Vercel'], res: [{ n: 'Docker Get Started (Oficial) — Gratuito', u: 'https://docs.docker.com/get-started/' }, { n: 'AWS Free Tier — Praticar cloud', u: 'https://aws.amazon.com/free/' }] },
+              { id: 'portfolio', ico: '🚀', title: 'Portfólio no GitHub', desc: '3-5 projetos reais. Seu portfólio vale mais que qualquer certificado para o primeiro emprego.', tags: ['GitHub', 'Portfolio', 'LinkedIn'], res: [{ n: 'Como montar portfólio (GitHub Docs)', u: 'https://docs.github.com/pt/account-and-profile/setting-up-and-managing-your-github-profile' }] },
+            ]
+          },
+        ]
+      },
+
+      redes: {
+        label: '🌐 Redes', color: '#337DFF', phases: [
+          {
+            label: 'Fase 1 — Fundamentos', cls: 'p1', nodes: [
+              { id: 'r-fund', ico: '📡', title: 'Fundamentos de Redes', desc: 'Modelo OSI, TCP/IP, endereçamento IPv4/IPv6 e cálculo de sub-redes (CIDR).', tags: ['OSI', 'TCP/IP', 'IPv4', 'Subnetting'], res: [{ n: 'Cisco NetAcad — Introdução às Redes (Gratuito)', u: 'https://www.netacad.com/' }, { n: 'Calculadora de Subnet', u: 'https://www.subnet-calculator.com/' }] },
+              { id: 'r-linux', ico: '🐧', title: 'Linux Essencial', desc: 'Comandos de terminal, permissões, SSH, gerenciamento de rede no Linux.', tags: ['Linux', 'Bash', 'Terminal', 'SSH'], res: [{ n: 'LPI Linux Essentials — Gratuito', u: 'https://learning.lpi.org/pt/learning-materials/010-160/' }, { n: 'OverTheWire Bandit — Praticar Linux', u: 'https://overthewire.org/wargames/bandit/' }] },
+            ]
+          },
+          {
+            label: 'Fase 2 — CCNA', cls: 'p2', nodes: [
+              { id: 'r-switch', ico: '🔀', title: 'Switching & VLANs', desc: 'Switches, Spanning Tree Protocol, VLANs, EtherChannel e inter-VLAN routing.', tags: ['Switch', 'VLAN', 'STP', 'Trunk'], res: [{ n: 'Cisco Packet Tracer (Gratuito — simulador)', u: 'https://www.netacad.com/courses/packet-tracer' }] },
+              { id: 'r-route', ico: '🗺️', title: 'Routing Protocols', desc: 'OSPF, roteamento estático e dinâmico. CCNA 200-301.', tags: ['OSPF', 'BGP', 'Routing', 'CCNA'], res: [{ n: 'Jeremy\'s IT Lab — CCNA Full Course (YouTube, Gratuito)', u: 'https://www.youtube.com/playlist?list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ' }] },
+              { id: 'r-wire', ico: '🔬', title: 'Wireshark', desc: 'Capture e analise tráfego de rede. Essencial para diagnóstico e segurança.', tags: ['Wireshark', 'Packet Analysis'], res: [{ n: 'Wireshark Tutorial (Oficial) — Gratuito', u: 'https://www.wireshark.org/docs/wsug_html_chunked/' }] },
+            ]
+          },
+          {
+            label: 'Fase 3 — Segurança & Cloud', cls: 'p3', nodes: [
+              { id: 'r-sec', ico: '🛡️', title: 'Segurança de Redes', desc: 'Firewalls, ACLs, VPN, IDS/IPS e hardening de dispositivos.', tags: ['Firewall', 'VPN', 'ACL', 'pfSense'], res: [{ n: 'pfSense Docs — Gratuito', u: 'https://docs.netgate.com/pfsense/en/latest/' }] },
+              { id: 'r-cloud', ico: '☁️', title: 'Cloud Networking', desc: 'AWS VPC, subnets, Security Groups, peering. O futuro das redes.', tags: ['AWS VPC', 'SDN', 'Cloud'], res: [{ n: 'AWS Networking Fundamentals (Gratuito)', u: 'https://aws.amazon.com/training/classroom/aws-networking-fundamentals/' }], optional: true },
+            ]
+          },
+        ]
+      },
+
+      seguranca: {
+        label: '🔐 Segurança', color: '#EF4444', phases: [
+          {
+            label: 'Fase 1 — Base', cls: 'p1', nodes: [
+              { id: 's-linux', ico: '🐧', title: 'Linux + Redes', desc: 'Kali Linux, linha de comando e fundamentos de rede. Pré-requisito absoluto.', tags: ['Kali Linux', 'Bash', 'TCP/IP'], res: [{ n: 'Kali Linux Revealed — PDF Gratuito', u: 'https://kali.training/downloads/Kali-Linux-Revealed-1st-edition.pdf' }] },
+              { id: 's-sec+', ico: '🏅', title: 'CompTIA Security+', desc: 'Certificação de entrada em segurança. Criptografia, ameaças, controles e LGPD.', tags: ['Security+', 'Criptografia', 'LGPD'], res: [{ n: 'Security+ (Professor Messer) — Gratuito', u: 'https://www.professormesser.com/security-plus/' }, { n: 'TryHackMe PreSecurity — Gratuito', u: 'https://tryhackme.com/path/outline/presecurity' }] },
+            ]
+          },
+          {
+            label: 'Fase 2 — Ofensivo & Defensivo', cls: 'p2', nodes: [
+              { id: 's-pent', ico: '🔓', title: 'Pentest & Ethical Hacking', desc: 'Reconhecimento, escaneamento, exploração e elaboração de relatório técnico.', tags: ['Metasploit', 'Nmap', 'OWASP', 'Burp Suite'], res: [{ n: 'TryHackMe Jr Penetration Tester — Gratuito/pago', u: 'https://tryhackme.com/path/outline/jrpenetrationtester' }, { n: 'Hack The Box Academy — Gratuito (básico)', u: 'https://academy.hackthebox.com/' }] },
+              { id: 's-blue', ico: '🔵', title: 'Blue Team / SOC', desc: 'Defesa ativa: SIEM, análise de logs, resposta a incidentes e threat hunting.', tags: ['SIEM', 'Splunk', 'ELK Stack', 'SOC'], res: [{ n: 'TryHackMe SOC Level 1 — Gratuito', u: 'https://tryhackme.com/path/outline/soclevel1' }] },
+            ]
+          },
+          {
+            label: 'Fase 3 — Especialização', cls: 'p3', nodes: [
+              { id: 's-web', ico: '🌐', title: 'Web Application Security', desc: 'OWASP Top 10, SQLi, XSS, CSRF, autenticação e autorização.', tags: ['OWASP', 'SQLi', 'XSS'], res: [{ n: 'PortSwigger Web Academy — Gratuito', u: 'https://portswigger.net/web-security' }, { n: 'OWASP Testing Guide — Gratuito', u: 'https://owasp.org/www-project-web-security-testing-guide/' }] },
+              { id: 's-oscp', ico: '🎯', title: 'OSCP / CEH', desc: 'Certificações avançadas de pentest. OSCP é a mais respeitada do setor.', tags: ['OSCP', 'CEH', 'Pentest'], res: [{ n: 'Offensive Security (OSCP PEN-200)', u: 'https://www.offsec.com/courses/pen-200/' }], optional: true },
+            ]
+          },
+        ]
+      },
+
+      dados: {
+        label: '📊 Dados', color: '#F59E0B', phases: [
+          {
+            label: 'Fase 1 — Base', cls: 'p1', nodes: [
+              { id: 'd-py', ico: '🐍', title: 'Python para Dados', desc: 'Pandas, NumPy, Matplotlib. A linguagem padrão da área de dados.', tags: ['Python', 'Pandas', 'NumPy', 'Jupyter'], res: [{ n: 'Kaggle Python Course — Gratuito', u: 'https://www.kaggle.com/learn/python' }, { n: 'Kaggle Pandas — Gratuito', u: 'https://www.kaggle.com/learn/pandas' }] },
+              { id: 'd-sql', ico: '🗄️', title: 'SQL Avançado', desc: 'CTEs, window functions, otimização de queries, modelagem dimensional.', tags: ['SQL', 'CTE', 'Window Functions'], res: [{ n: 'Mode SQL Tutorial — Gratuito', u: 'https://mode.com/sql-tutorial/' }, { n: 'SQLZoo — Gratuito', u: 'https://sqlzoo.net/' }] },
+            ]
+          },
+          {
+            label: 'Fase 2 — Análise & BI', cls: 'p2', nodes: [
+              { id: 'd-viz', ico: '📈', title: 'Power BI & Visualização', desc: 'Dashboards corporativos com Power BI + visualizações Python (Seaborn, Plotly).', tags: ['Power BI', 'Seaborn', 'Plotly'], res: [{ n: 'Power BI (Microsoft Learn) — Gratuito', u: 'https://learn.microsoft.com/pt-br/training/powerplatform/power-bi' }, { n: 'Kaggle Data Visualization — Gratuito', u: 'https://www.kaggle.com/learn/data-visualization' }] },
+              { id: 'd-stats', ico: '📐', title: 'Estatística & Probabilidade', desc: 'Distribuições, testes de hipóteses, correlação, regressão linear.', tags: ['Estatística', 'Regressão', 'A/B Test'], res: [{ n: 'Khan Academy Estatística — Gratuito', u: 'https://pt.khanacademy.org/math/statistics-probability' }] },
+            ]
+          },
+          {
+            label: 'Fase 3 — Machine Learning', cls: 'p3', nodes: [
+              { id: 'd-ml', ico: '🤖', title: 'Machine Learning', desc: 'Scikit-learn, modelos supervisionados e não-supervisionados, avaliação.', tags: ['Scikit-learn', 'Random Forest', 'Clustering'], res: [{ n: 'Kaggle Intro to ML — Gratuito', u: 'https://www.kaggle.com/learn/intro-to-machine-learning' }, { n: 'Google ML Crash Course — Gratuito', u: 'https://developers.google.com/machine-learning/crash-course' }] },
+              { id: 'd-dl', ico: '🧬', title: 'Deep Learning', desc: 'TensorFlow, Keras, redes neurais. IA generativa e LLMs.', tags: ['TensorFlow', 'Keras', 'LLM'], res: [{ n: 'DeepLearning.AI Specialization (Coursera)', u: 'https://www.deeplearning.ai/' }], optional: true },
+            ]
+          },
+        ]
+      },
+
+      cloud: {
+        label: '☁️ Cloud & DevOps', color: '#06B6D4', phases: [
+          {
+            label: 'Fase 1 — Fundamentos', cls: 'p1', nodes: [
+              { id: 'c-linux', ico: '🐧', title: 'Linux & Bash', desc: 'Gerenciamento de serviços, scripting Bash, SSH e processos — base do DevOps.', tags: ['Linux', 'Bash', 'SSH', 'Systemd'], res: [{ n: 'Linux Foundation (LF Education) — Gratuito', u: 'https://training.linuxfoundation.org/training/introduction-to-linux/' }] },
+              { id: 'c-git', ico: '🔧', title: 'Git + GitHub Actions', desc: 'Versionamento avançado e pipelines CI/CD com GitHub Actions.', tags: ['Git', 'GitHub Actions', 'CI/CD', 'YAML'], res: [{ n: 'GitHub Actions (Docs oficiais) — Gratuito', u: 'https://docs.github.com/en/actions' }] },
+            ]
+          },
+          {
+            label: 'Fase 2 — Cloud & Containers', cls: 'p2', nodes: [
+              { id: 'c-docker', ico: '🐳', title: 'Docker & Containers', desc: 'Imagens, volumes, redes, Docker Compose. Base para Kubernetes.', tags: ['Docker', 'Dockerfile', 'Compose'], res: [{ n: 'Play with Docker — Gratuito', u: 'https://labs.play-with-docker.com/' }, { n: 'Docker Docs (Oficial)', u: 'https://docs.docker.com/' }] },
+              { id: 'c-aws', ico: '☁️', title: 'AWS Cloud Practitioner', desc: 'EC2, S3, RDS, IAM, VPC, Lambda. Certificação de entrada na cloud.', tags: ['AWS', 'EC2', 'S3', 'IAM'], res: [{ n: 'AWS Cloud Practitioner Essentials — Gratuito', u: 'https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/' }, { n: 'AWS Free Tier (praticar)', u: 'https://aws.amazon.com/free/' }] },
+            ]
+          },
+          {
+            label: 'Fase 3 — Orquestração & IaC', cls: 'p3', nodes: [
+              { id: 'c-k8s', ico: '⚓', title: 'Kubernetes', desc: 'Orquestração de containers: pods, deployments, services, helm charts.', tags: ['Kubernetes', 'Pods', 'Helm'], res: [{ n: 'Kubernetes Tutorial (Oficial) — Gratuito', u: 'https://kubernetes.io/docs/tutorials/' }, { n: 'Play with Kubernetes — Gratuito', u: 'https://labs.play-with-k8s.com/' }] },
+              { id: 'c-tf', ico: '🏗️', title: 'Terraform (IaC)', desc: 'Infrastructure as Code: provisione cloud com código versionável.', tags: ['Terraform', 'HCL', 'Ansible'], res: [{ n: 'Terraform Tutorials (HashiCorp) — Gratuito', u: 'https://developer.hashicorp.com/terraform/tutorials' }] },
+            ]
+          },
+        ]
+      },
+
+      mobile: {
+        label: '📱 Mobile', color: '#8B5CF6', phases: [
+          {
+            label: 'Fase 1 — Base', cls: 'p1', nodes: [
+              { id: 'm-lang', ico: '💻', title: 'JavaScript ou Dart', desc: 'React Native usa JavaScript; Flutter usa Dart. Escolha um e vá fundo.', tags: ['JavaScript', 'Dart', 'Lógica'], res: [{ n: 'JavaScript (freeCodeCamp) — Gratuito', u: 'https://freecodecamp.org' }, { n: 'Dart Language Tour (Oficial)', u: 'https://dart.dev/language' }] },
+              { id: 'm-ui', ico: '🎨', title: 'UI/UX Mobile', desc: 'Material Design (Android) e Human Interface Guidelines (iOS).', tags: ['Material Design', 'HIG', 'Figma'], res: [{ n: 'Material Design (Google) — Gratuito', u: 'https://m3.material.io/' }] },
+            ]
+          },
+          {
+            label: 'Fase 2 — Framework', cls: 'p2', nodes: [
+              { id: 'm-flutter', ico: '💙', title: 'Flutter', desc: 'Apps Android + iOS com um único código Dart. Da Google, mantido ativamente.', tags: ['Flutter', 'Dart', 'Widgets', 'State'], res: [{ n: 'Flutter Codelabs (Oficial) — Gratuito', u: 'https://flutter.dev/learn' }, { n: 'Flutterando (Comunidade BR) — Gratuito', u: 'https://flutterando.com.br/' }] },
+              { id: 'm-rn', ico: '⚛️', title: 'React Native', desc: 'Apps mobile com JavaScript/React. Ideal para quem já sabe React.', tags: ['React Native', 'Expo', 'Redux'], res: [{ n: 'React Native Docs — Gratuito', u: 'https://reactnative.dev/docs/getting-started' }, { n: 'Expo (snack) — Testar no browser', u: 'https://snack.expo.dev/' }] },
+            ]
+          },
+          {
+            label: 'Fase 3 — Deploy & App real', cls: 'p3', nodes: [
+              { id: 'm-backend', ico: '🔗', title: 'Backend + Firebase', desc: 'Conecte ao Firebase (auth, Firestore, push notifications) ou à sua API REST.', tags: ['Firebase', 'REST API', 'Auth'], res: [{ n: 'Firebase (Google) — Gratuito (plano Spark)', u: 'https://firebase.google.com/' }] },
+              { id: 'm-publish', ico: '🚀', title: 'Publicar na Play Store & App Store', desc: 'Google Play Console e App Store Connect. Seu primeiro app publicado!', tags: ['Play Store', 'App Store', 'ASO'], res: [{ n: 'Google Play Console — Guia de lançamento', u: 'https://developer.android.com/distribute/console' }, { n: 'App Store Connect (Apple)', u: 'https://developer.apple.com/app-store-connect/' }] },
+            ]
+          },
+        ]
+      },
+    };
+
+    /* ── STATE ── */
+    const PK = 'subatec_rm_progress';
+    function getProg() { return JSON.parse(localStorage.getItem(PK) || '{}') }
+    function setProg(p) { localStorage.setItem(PK, JSON.stringify(p)) }
+    let curPath = 'programacao';
+
+    /* ── BUILD PATH TABS ── */
+    function buildTabs() {
+      const c = document.getElementById('path-tabs');
+      c.innerHTML = Object.entries(MAPS).map(([k, d]) => `
+    <button class="ptab${k === curPath ? ' active' : ''}" data-path="${k}" onclick="selectPath('${k}')"
+      style="${k === curPath ? 'background:linear-gradient(135deg,' + d.color + 'cc,' + d.color + '88);color:#020B2A;border:none' : ''}">
+      <span class="te">${d.label.split(' ')[0]}</span>${d.label.split(' ').slice(1).join(' ')}
+    </button>`).join('');
+    }
+
+    /* ── RENDER ROADMAP ── */
+    function renderRoadmap(path) {
+      curPath = path;
+      const data = MAPS[path]; if (!data) return;
+      const prog = getProg();
+      const pfx = path + '_';
+      const canvas = document.getElementById('rmap-canvas');
+      canvas.innerHTML = '';
+
+      let total = 0, done = 0;
+
+      const track = document.createElement('div');
+      track.className = 'rmap-track active';
+      track.id = 'rt-' + path;
+
+      data.phases.forEach(ph => {
+        const phEl = document.createElement('div'); phEl.className = 'rmap-phase';
+        const lbl = document.createElement('div'); lbl.className = 'phase-lbl ' + ph.cls; lbl.textContent = ph.label;
+        phEl.appendChild(lbl);
+        const row = document.createElement('div'); row.className = 'rmap-row';
+        ph.nodes.forEach((nd, ni) => {
+          total++;
+          const isDone = !!prog[pfx + nd.id];
+          if (isDone) done++;
+          const div = document.createElement('div');
+          div.className = 'node' + (isDone ? ' done' : '') + (nd.optional ? ' optional' : '');
+          div.style.animationDelay = (ni * 80) + 'ms';
+          if (isDone) { div.style.borderLeftColor = data.color; div.style.borderLeftWidth = '3px' }
+          div.innerHTML = `
+        <div class="node-hd"><span class="node-ico">${nd.ico}</span><span class="node-title">${nd.title}</span></div>
+        <div class="node-desc">${nd.desc}</div>
+        <div class="node-tags">${nd.tags.map(t => `<span class="ntag">${t}</span>`).join('')}${nd.optional ? '<span class="node-opt">⬦ Opcional</span>' : ''}</div>
+        <button class="exp-btn" onclick="toggleDetail(this)">▾ Recursos gratuitos</button>
+        <div class="node-detail">
+          <div>
+            <div class="res-lbl">📚 Onde aprender (grátis)</div>
+            ${nd.res.map(r => `<div class="res-link"><a href="${r.u}" target="_blank" rel="noopener">↗ ${r.n}</a></div>`).join('')}
+          </div>
+          <button class="done-btn${isDone ? ' marked' : ''}" onclick="toggleDone('${path}','${nd.id}',this)">
+            ${isDone ? '✓ Concluído — clique para desmarcar' : '○ Marcar como concluído'}
+          </button>
+        </div>`;
+          row.appendChild(div);
+        });
+        phEl.appendChild(row);
+        track.appendChild(phEl);
+      });
+
+      canvas.appendChild(track);
+
+      // Update progress
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('prog-pct').textContent = pct + '% completo';
+      document.getElementById('prog-steps').textContent = done + '/' + total + ' etapas';
+
+      // Update tabs
+      buildTabs();
+      document.querySelectorAll('.ptab').forEach(t => {
+        const active = t.dataset.path === path;
+        const dc = MAPS[t.dataset.path]?.color || 'var(--accent)';
+        if (active) { t.classList.add('active'); t.style.background = 'linear-gradient(135deg,' + dc + 'cc,' + dc + '88)'; t.style.color = '#020B2A'; t.style.border = 'none' }
+        else { t.classList.remove('active'); t.style.background = ''; t.style.color = ''; t.style.border = '' }
+      });
+    }
+
+    function toggleDetail(btn) {
+      const d = btn.nextElementSibling;
+      const o = d.classList.contains('open');
+      d.classList.toggle('open', !o);
+      btn.textContent = o ? '▾ Recursos gratuitos' : '▴ Fechar';
+    }
+
+    function toggleDone(path, nodeId, btn) {
+      const prog = getProg(); const k = path + '_' + nodeId;
+      const now = !prog[k]; if (now) prog[k] = true; else delete prog[k];
+      setProg(prog);
+      btn.textContent = now ? '✓ Concluído — clique para desmarcar' : '○ Marcar como concluído';
+      btn.classList.toggle('marked', now);
+      btn.closest('.node').classList.toggle('done', now);
+      const dc = MAPS[path]?.color || 'var(--accent)';
+      if (now) { btn.closest('.node').style.borderLeftColor = dc; btn.closest('.node').style.borderLeftWidth = '3px' }
+      else { btn.closest('.node').style.borderLeftColor = ''; btn.closest('.node').style.borderLeftWidth = '' }
+      renderRoadmap(path);
+      // Re-open after render
+      const nd = document.querySelector(`[onclick*="'${nodeId}'"]`);
+      if (nd) { const det = nd.closest('.node-detail'); if (det) { det.classList.add('open'); const eb = det.previousElementSibling; if (eb) eb.textContent = '▴ Fechar' } }
+      toast(now ? 'Etapa marcada como concluída! 🎉' : 'Desmarcada.', 's');
+    }
+
+    function selectPath(p) { renderRoadmap(p) }
+    function resetProg() {
+      if (!confirm('Resetar progresso de "' + MAPS[curPath].label + '"?')) return;
+      const prog = getProg(); Object.keys(prog).filter(k => k.startsWith(curPath + '_')).forEach(k => delete prog[k]);
+      setProg(prog); renderRoadmap(curPath); toast('Progresso resetado.', 's');
+    }
+
+    function toast(msg, type = 's') {
+      const c = document.getElementById('toasts');
+      const t = document.createElement('div'); t.className = 'toast ' + type;
+      t.innerHTML = `<span>${type === 's' ? '✅' : '❌'}</span>${msg}`; c.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = '.3s'; setTimeout(() => t.remove(), 300) }, 3000);
+    }
+
+    buildTabs(); renderRoadmap('programacao');
+  </script>
+</body>
+
+</html>
