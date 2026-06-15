@@ -53,7 +53,50 @@ window.handleSearch = function() {
 // Vincula apelidos para cobrir tags onclick antigas presentes no HTML
 window.doSearch = window.handleSearch;
 window.buscar = window.handleSearch;
+/* ── NOVA LÓGICA DA BARRA DE SUGESTÕES ── */
+document.getElementById('searchInput').addEventListener('input', function() {
+    const box = document.getElementById('searchSuggestions');
+    const q = this.value.toLowerCase().trim();
 
+    if (q.length === 0) {
+        box.style.display = 'none';
+        return;
+    }
+
+    // LISTA DE SUGESTÕES (Procura em várias classes possíveis para não dar erro)
+    const elementosTitulo = document.querySelectorAll('.post-ttl, .course-title, .card-title, h3');
+    let resultados = [];
+
+    elementosTitulo.forEach(t => {
+        // Evita pegar títulos do menu ou do hero
+        if (t.innerText && t.innerText.toLowerCase().includes(q) && t.innerText.length < 60) {
+            if (!resultados.includes(t.innerText.trim())) {
+                resultados.push(t.innerText.trim());
+            }
+        }
+    });
+    
+    if (resultados.length > 0) {
+        // Remove a borda vermelha e formata as sugestões
+        box.style.border = '1px solid var(--border2)'; 
+        box.style.background = 'var(--bg3)';
+        
+        box.innerHTML = resultados.slice(0, 5).map(r => 
+            `<div class="suggestion-item" style="padding: 12px 16px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.2s;" 
+                  onmouseover="this.style.background='var(--bg2)'" 
+                  onmouseout="this.style.background='transparent'"
+                  onclick="document.getElementById('searchInput').value='${r.replace(/'/g, "\\'")}'; document.getElementById('searchSuggestions').style.display='none'; window.handleSearch();">
+                🔍 ${r}
+             </div>`
+        ).join('');
+        box.style.display = 'block';
+    } else {
+        // Mensagem caso não ache de fato
+        box.style.border = '1px solid var(--border2)';
+        box.innerHTML = '<div style="padding: 12px 16px; color: var(--muted); font-size: 13px;">Nenhum curso correspondente...</div>';
+        box.style.display = 'block';
+    }
+});
 /* ── FILTROS DE CATEGORIA INTELIGENTES ── */
 window.filterCat = function(el, cat) {
   categoriaAtual = cat;

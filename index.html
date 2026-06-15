@@ -13,9 +13,6 @@
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <style>
-
-    /* ═══ HERO ═══ */
-   
   </style>
 </head>
 
@@ -23,10 +20,10 @@
 
   <!-- ═══ NAV ═══ -->
   <nav>
-    <a href="index.html" class="logo">
-      <div class="logo-ico">⚡</div>
-      <span><span class="logo-sul">Sul</span><span class="logo-atec">ba</span><span>tec</span></span>
-    </a>
+<a href="index.html" class="logo">
+  <img src="logo.png" alt="Subatec" class="logo-img" />
+  <span><span class="logo-sul">Sul</span><span class="logo-atec">ba</span><span>tec</span>
+</a>
     <div class="nav-links">
       <a href="#cursos" class="active">Cursos</a>
       <a href="#oportunidades">Oportunidades</a>
@@ -58,52 +55,42 @@
       <a href="https://youtube.com/@subatec" target="_blank" class="soc-btn yt">▶️ YouTube</a>
     </div>
   </div>
-
-  <!--Barra de Sugestões-->
-  <div class="search-wrapper">
-
-  <div
-    class="suggestions-box"
-    id="searchSuggestions">
-  </div>
-
 </div>
 
-  <!-- ═══ HERO ═══ -->
-  <div class="hero-wrap">
-    <canvas id="cv"></canvas>
-    <div class="glow g1"></div>
-    <div class="glow g2"></div>
-    <div class="hero">
-      <div class="hero-eye"><span class="hero-eye-dot"></span>Sul da Bahia · 100% gratuito · Projeto Unex S.I.</div>
-      <h1>Aprenda tecnologia e <span class="grad">encontre oportunidades</span> em TI</h1>
-      <p class="hero-sub">Cursos gratuitos, concursos de TI, guias de carreira, estágios e conteúdos para estudantes do
-        Sul da Bahia. Do zero ao mercado de trabalho.</p>
-      <div class="hero-acts">
-        <a href="#cursos" class="btn btn-p">📚 Explorar cursos</a>
-        <a href="#oportunidades" class="btn btn-c">💼 Ver oportunidades</a>
-        <a href="roadmap.html" class="btn btn-o">🗺 Meu roadmap</a>
+ <!-- ═══ HERO ═══ -->
+<div class="hero-wrap">
+  <canvas id="cv"></canvas>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="hero">
+    <div class="hero-eye"><span class="hero-eye-dot"></span>Sul da Bahia · 100% gratuito · Projeto Unex S.I.</div>
+    <h1>Aprenda tecnologia e <span class="grad">encontre oportunidades</span> em TI</h1>
+    <p class="hero-sub">Cursos gratuitos, concursos de TI, guias de carreira, estágios e conteúdos para estudantes do Sul da Bahia. Do zero ao mercado de trabalho.</p>
+    <div class="hero-acts">
+      <a href="#cursos" class="btn btn-p">📚 Explorar cursos</a>
+      <a href="#oportunidades" class="btn btn-c">💼 Ver oportunidades</a>
+      <a href="roadmap.html" class="btn btn-o">🗺 Meu roadmap</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n grad" data-count="120" data-suffix="+">0+</div>
+        <div class="stat-l">Cursos gratuitos</div>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-n grad" data-count="120" data-suffix="+">0+</div>
-          <div class="stat-l">Cursos gratuitos</div>
-        </div>
-        <div>
-          <div class="stat-n grad" data-count="3500" data-suffix="+">0+</div>
-          <div class="stat-l">Estudantes da Bahia</div>
-        </div>
-        <div>
-          <div class="stat-n grad" data-count="7" data-suffix="">0</div>
-          <div class="stat-l">Áreas de carreira</div>
-        </div>
-        <div>
-          <div class="stat-n grad" data-count="100" data-suffix="%">0%</div>
-          <div class="stat-l">Gratuito, sempre</div>
-        </div>
+      <div>
+        <div class="stat-n grad" data-count="3500" data-suffix="+">0+</div>
+        <div class="stat-l">Estudantes da Bahia</div>
+      </div>
+      <div>
+        <div class="stat-n grad" data-count="7" data-suffix="">0</div>
+        <div class="stat-l">Áreas de carreira</div>
+      </div>
+      <div>
+        <div class="stat-n grad" data-count="100" data-suffix="%">0%</div>
+        <div class="stat-l">Gratuito, sempre</div>
       </div>
     </div>
   </div>
+</div>
 
   <!-- ═══ SEARCH ═══ -->
 <div class="search-wrap">
@@ -883,13 +870,33 @@
   }
 
   /* ── ADMIN POSTS (Painel Simulado Local) ── */
-  const PASS = 'subatec2026';
+  const PASS = 'sulbatec2026';
   let isAdmin = sessionStorage.getItem('sba') === '1';
   
-  window.showAdmin = function() {
-    if (!isAdmin) { const p = prompt('🔐 Senha de administrador:'); if (p === PASS) { sessionStorage.setItem('sba', '1'); isAdmin = true; if(typeof toast === 'function') toast('Bem-vindo, admin! 👋', 's') } else if (p !== null) { if(typeof toast === 'function') toast('Senha incorreta.', 'e'); return } }
-    document.getElementById('admin-back').classList.add('open');
+ window.showAdmin = function() {
+  // Se ainda não for admin, pede a senha
+  if (!isAdmin) { 
+    const p = prompt('🔐 Senha de administrador:'); 
+    
+    if (p === PASS) { 
+      sessionStorage.setItem('sba', '1'); 
+      isAdmin = true; 
+      if(typeof toast === 'function') toast('Bem-vindo, admin! 👋', 's');
+    } else {
+      // Se errar a senha, cancelar, mudar de aba ou tentar burlar: cancela tudo aqui
+      if (p !== null && typeof toast === 'function') {
+        toast('Senha incorreta.', 'e');
+      }
+      return; // Bloqueia a execução imediatamente e não abre o painel
+    } 
   }
+  
+  // SÓ chega aqui se já era admin ou se acabou de acertar a senha acima
+  const adminPanel = document.getElementById('admin-back');
+  if (adminPanel) {
+    adminPanel.classList.add('open');
+  }
+}
   window.closeAdmin = function() { document.getElementById('admin-back').classList.remove('open') }
   function getPosts() { return JSON.parse(localStorage.getItem('sba_posts') || '[]') }
   function setPosts(p) { localStorage.setItem('sba_posts', JSON.stringify(p)) }
@@ -939,4 +946,3 @@
 </script>
 </body>
 
-</html>
